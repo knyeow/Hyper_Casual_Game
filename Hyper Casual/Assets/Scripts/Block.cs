@@ -33,7 +33,8 @@ public class Block : MonoBehaviour
     
     void FixedUpdate()
     {
-        
+        Physics2D.IgnoreLayerCollision(6, 7);
+
         brickTimer += Time.deltaTime;
 
         speed = startSpeed + StaticCounters.brickCounter * .5f;
@@ -56,7 +57,7 @@ public class Block : MonoBehaviour
 
     private bool IsTouchingWall()
     {
-        RaycastHit2D checkWall = Physics2D.Raycast(transform.position,new Vector2(direction,0),2,wallLayer);
+        RaycastHit2D checkWall = Physics2D.Raycast(transform.position,new Vector2(direction,0),4,wallLayer);
 
         if (checkWall)
             return true;
@@ -111,4 +112,10 @@ public class Block : MonoBehaviour
             NormalBlocks();
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (numberOfBlock % 20 == 0)
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+
+    }
 }
