@@ -10,6 +10,7 @@ public class Block : MonoBehaviour
     
 
     [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private LayerMask brickLayer;
 
 
     [SerializeField] private Transform cameraPosition;
@@ -17,23 +18,25 @@ public class Block : MonoBehaviour
     public float numberOfBlock = 1;
 
     private Rigidbody2D rb;
+    private BoxCollider2D bc;
 
     private float direction =1;
 
     private bool hasTouched=false;
 
     private float brickTimer;
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+        bc = GetComponent<BoxCollider2D>();
     }
 
     
     void FixedUpdate()
     {
         Physics2D.IgnoreLayerCollision(6, 7);
+
+      
 
         brickTimer += Time.deltaTime;
 
@@ -64,16 +67,7 @@ public class Block : MonoBehaviour
 
         return false;
     }
-    private void TouchActivities()
-    {
-        
-        brickTimer = 0;
-        hasTouched = true;
-        rb.velocity = Vector2.zero;
-        rb.bodyType = RigidbodyType2D.Dynamic;
-        CreateBlock();
-    }
- 
+
     private void CreateBlock()
     {
         StaticCounters.brickCounter++;

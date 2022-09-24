@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class DeadZone : MonoBehaviour
 {
+    [SerializeField] GameOverScreen gameOverScreen;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Bricks") && collision.GetComponent<Rigidbody2D>().velocity.y < -2)
         {
             Debug.Log("you have died");
             collision.gameObject.SetActive(false);
+            gameOverScreen.Setup();
         }
+
+
     }
 }
