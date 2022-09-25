@@ -14,6 +14,8 @@ public class Block : MonoBehaviour
 
 
     [SerializeField] private Transform cameraPosition;
+    [SerializeField] private Transform spawnPointRight;
+    [SerializeField] private Transform spawnPointLeft;
 
     public float numberOfBlock = 1;
 
@@ -72,9 +74,11 @@ public class Block : MonoBehaviour
     {
         StaticCounters.brickCounter++;
         GameObject nextBlock = Instantiate(this.gameObject);
-        nextBlock.transform.position = cameraPosition.position + new Vector3(0,-2,25);
-        nextBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        // nextBlock.transform.position = cameraPosition.position + new Vector3(0,-2,25);
         nextBlock.GetComponent<Block>().numberOfBlock = numberOfBlock + 1;
+        spawnBlocks(nextBlock);
+        nextBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        
     }
     private IEnumerator TouchActivs()
     {
@@ -106,10 +110,20 @@ public class Block : MonoBehaviour
             NormalBlocks();
     }
 
+    private void spawnBlocks(GameObject nextBlock)
+    {
+        if(nextBlock.GetComponent<Block>().numberOfBlock % 2 ==0)
+            nextBlock.transform.position = spawnPointLeft.position;
+        else
+            nextBlock.transform.position = spawnPointRight.position;
+    }
+    
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (numberOfBlock % 20 == 0)
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
     }
+
 }

@@ -8,7 +8,7 @@ public class DeadZone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Bricks") && collision.GetComponent<Rigidbody2D>().velocity.y < -2)
+        if (collision.CompareTag("Bricks") && collision.GetComponent<Rigidbody2D>().velocity.y < -3.5f)
         {
             Debug.Log("you have died");
             collision.gameObject.SetActive(false);
