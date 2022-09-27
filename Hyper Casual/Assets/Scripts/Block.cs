@@ -64,7 +64,7 @@ public class Block : MonoBehaviour
 
     private bool IsTouchingWall()
     {
-        RaycastHit2D checkWall = Physics2D.Raycast(transform.position,new Vector2(direction,0),4,wallLayer);
+        RaycastHit2D checkWall = Physics2D.Raycast(transform.position,new Vector2(direction,0),5,wallLayer);
 
         if (checkWall)
             return true;

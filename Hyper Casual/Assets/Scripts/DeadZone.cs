@@ -17,7 +17,7 @@ public class DeadZone : MonoBehaviour
             StaticCounters.isGameEnd = true;
             collision.gameObject.SetActive(false);
             gameOverScreen.Setup();
-            Debug.Log(mainGame.GetComponent<MainGame>().maxScore);
+            
         }
 
 
