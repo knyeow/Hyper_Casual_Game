@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class StaticCounters : MonoBehaviour
 {
-    public static float brickCounter =0;
+    [SerializeField] private GameObject mainGame;
 
+
+    public static float brickCounter =0;
+    public static bool isGameEnd=false;
 
 }

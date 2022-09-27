@@ -38,7 +38,9 @@ public class Block : MonoBehaviour
     {
         Physics2D.IgnoreLayerCollision(6, 7);
 
-      
+
+        if (StaticCounters.isGameEnd)
+            return;
 
         brickTimer += Time.deltaTime;
 

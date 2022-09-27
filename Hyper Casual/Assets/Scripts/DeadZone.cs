@@ -6,13 +6,18 @@ public class DeadZone : MonoBehaviour
 {
     [SerializeField] GameOverScreen gameOverScreen;
 
+    [SerializeField]GameObject mainGame;
+  
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Bricks") && collision.GetComponent<Rigidbody2D>().velocity.y < -3.5f)
         {
-            Debug.Log("you have died");
+
+            StaticCounters.isGameEnd = true;
             collision.gameObject.SetActive(false);
             gameOverScreen.Setup();
+            Debug.Log(mainGame.GetComponent<MainGame>().maxScore);
         }
 
 
