@@ -17,6 +17,9 @@ public class Block : MonoBehaviour
     [SerializeField] private Transform spawnPointRight;
     [SerializeField] private Transform spawnPointLeft;
 
+    [SerializeField] private Sprite[] blockSprites;
+    
+
     public float numberOfBlock = 1;
 
     private Rigidbody2D rb;
@@ -94,13 +97,13 @@ public class Block : MonoBehaviour
     private void SpecialBlocks()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        GetComponent<SpriteRenderer>().color = Color.yellow;
+        GetComponent<SpriteRenderer>().sprite = blockSprites[1];
 
     }
     private void NormalBlocks()
     {
         rb.constraints = RigidbodyConstraints2D.None;
-        GetComponent<SpriteRenderer>().color = Color.white;
+        GetComponent<SpriteRenderer>().sprite = blockSprites[0];
     }
 
     private void ChangeBlocks()
