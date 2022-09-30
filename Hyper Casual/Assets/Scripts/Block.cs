@@ -7,10 +7,13 @@ public class Block : MonoBehaviour
     [SerializeField] private float startSpeed;
 
     private float speed;
-    
+
+    [SerializeField] private GameObject specialBlock;
+    [SerializeField] private GameObject basicBlock;
 
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private LayerMask brickLayer;
+
 
 
     [SerializeField] private Transform cameraPosition;
@@ -22,7 +25,7 @@ public class Block : MonoBehaviour
 
     public float numberOfBlock = 1;
 
-    private Rigidbody2D rb;
+    protected Rigidbody2D rb;
     private BoxCollider2D bc;
 
     private float direction =1;
@@ -52,7 +55,7 @@ public class Block : MonoBehaviour
         if (hasTouched)
             return;
 
-        ChangeBlocks();
+       // ChangeBlocks();
 
         rb.velocity = new Vector2(speed*direction, rb.velocity.y);
   
@@ -63,6 +66,7 @@ public class Block : MonoBehaviour
         if (Input.GetMouseButton(0) && brickTimer > 0.1f)
             StartCoroutine(TouchActivs());
 
+       
     }
 
     private bool IsTouchingWall()
@@ -78,8 +82,15 @@ public class Block : MonoBehaviour
     private void CreateBlock()
     {
         StaticCounters.brickCounter++;
-        GameObject nextBlock = Instantiate(this.gameObject);
-        // nextBlock.transform.position = cameraPosition.position + new Vector3(0,-2,25);
+        GameObject nextBlock;
+        if (((numberOfBlock + 1) % 20 == 0))
+        {
+           
+           nextBlock = Instantiate(specialBlock);
+            nextBlock.SetActive(true);
+        }
+        else
+            nextBlock = Instantiate(basicBlock);
         nextBlock.GetComponent<Block>().numberOfBlock = numberOfBlock + 1;
         spawnBlocks(nextBlock);
         nextBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
@@ -123,12 +134,4 @@ public class Block : MonoBehaviour
             nextBlock.transform.position = spawnPointRight.position;
     }
     
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (numberOfBlock % 20 == 0)
-            rb.constraints = RigidbodyConstraints2D.FreezeAll;
-
-    }
-
 }
