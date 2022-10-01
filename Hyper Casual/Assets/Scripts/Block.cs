@@ -46,7 +46,10 @@ public class Block : MonoBehaviour
 
 
         if (StaticCounters.isGameEnd)
+        {
+            this.rb.velocity = Vector2.zero;
             return;
+        }
 
         brickTimer += Time.deltaTime;
 
