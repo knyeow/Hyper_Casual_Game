@@ -11,7 +11,7 @@ public class BlockEffect : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.position.y < transform.position.y && Mathf.Abs(collision.transform.position.x - transform.position.x) < 0.15f &&!effectPlayed)
+        if (collision.gameObject.CompareTag("Bricks")&&collision.transform.position.y < transform.position.y &&  Mathf.Abs(collision.transform.position.x - transform.position.x) < 0.15f &&!effectPlayed)
             ps.Play();
             effectPlayed = true;
            
