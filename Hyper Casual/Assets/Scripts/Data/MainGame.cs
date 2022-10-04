@@ -9,6 +9,8 @@ public  class MainGame : MonoBehaviour
     private void Start()
     {
         LoadPlayer();
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
     }
 
     private void FixedUpdate()

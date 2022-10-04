@@ -51,9 +51,12 @@ public class Block : MonoBehaviour
             return;
         }
 
-        brickTimer += Time.deltaTime;
 
+        brickTimer += Time.deltaTime;
         speed = startSpeed + StaticCounters.brickCounter * .5f;
+
+
+
 
         if (hasTouched)
             return;
@@ -90,10 +93,11 @@ public class Block : MonoBehaviour
         {
            
            nextBlock = Instantiate(specialBlock);
-            nextBlock.SetActive(true);
+            
         }
         else
             nextBlock = Instantiate(basicBlock);
+        nextBlock.SetActive(true);
         nextBlock.GetComponent<Block>().numberOfBlock = numberOfBlock + 1;
         spawnBlocks(nextBlock);
         nextBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
@@ -136,5 +140,6 @@ public class Block : MonoBehaviour
         else
             nextBlock.transform.position = spawnPointRight.position;
     }
+   
     
 }
